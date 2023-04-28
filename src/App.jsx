@@ -1,6 +1,7 @@
 import "./App.css";
-import Search from "./comp/search/Search";
-import { GEO_API_URL } from "./Api";
+import CurrentWeather from "./comp/CurrentWeather";
+import Search from "./comp/Search";
+// import { GEO_API_URL } from "./Api";
 
 function App() {
   const handleOnSearchChange = (searchData) => {
@@ -8,9 +9,10 @@ function App() {
   };
   return (
     <>
-      <h1>Ola</h1>
+      <h1>Get City</h1>
       <Search onSearchChange={handleOnSearchChange} />
-      {console.log(GEO_API_URL)}
+      {/* Activates when full country is entered in the AsycPaginate */}
+      <CurrentWeather />
     </>
   );
 }

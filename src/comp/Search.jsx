@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { AsyncPaginate } from "react-select-async-paginate";
-import { GEO_API_URL, geoApiOptions } from "../../Api";
+import { GEO_API_URL, geoApiOptions } from "../Api";
 
 export default function Search({ onSearchChange }) {
   // required to validate the prop
@@ -9,11 +9,13 @@ export default function Search({ onSearchChange }) {
     onSearchChange: PropTypes.func.isRequired,
   };
 
-  const { search, setSearch } = useState("");
+  // STEP 2 set data from input
+  const [search, setSearch] = useState("");
 
   const handleOnChange = (searchData) => {
     setSearch(searchData);
-    onSearchChange("searchData");
+    onSearchChange(searchData);
+    // activate when search Data is retrieve
   };
 
   const loadOptions = (inputValue) => {
@@ -33,6 +35,7 @@ export default function Search({ onSearchChange }) {
 
   return (
     <div>
+      {/* STEP 1 get data from input */}
       <AsyncPaginate
         placeholder="Enter City"
         debounceTimeout={600}

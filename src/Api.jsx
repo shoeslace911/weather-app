@@ -8,10 +8,3 @@ export const geoApiOptions = {
 };
 
 export const GEO_API_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo";
-try {
-  const response = await fetch(GEO_API_URL, geoApiOptions);
-  const result = await response.text();
-  console.log(result);
-} catch (error) {
-  console.error(error);
-}
