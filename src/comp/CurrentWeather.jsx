@@ -3,7 +3,7 @@ export default function CurrentWeather() {
     <div>
       <div className="top">
         <img src="../../sun.png" alt="sun" style={{ width: "20%" }} />
-        <h2 className="city">Yokohama, Japan</h2>
+        <h2 className="city"></h2>
         <p className="weather-description">Sunny</p>
       </div>
       <div className="bottom">
