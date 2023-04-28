@@ -20,7 +20,7 @@ export default function Search({ onSearchChange }) {
 
   const loadOptions = (inputValue) => {
     return (
-      fetch(`${GEO_API_URL}/cities?minPopulation=1000000&namePrefix=${inputValue}`, geoApiOptions)
+      fetch(`${GEO_API_URL}/cities?minPopulation=100000&namePrefix=${inputValue}`, geoApiOptions)
         .then((response) => response.json())
         // we need lang and longitude for the weather
         .then((response) => {
