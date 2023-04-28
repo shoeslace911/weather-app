@@ -10,8 +10,12 @@ function App() {
 
   const handleOnSearchChange = (searchData) => {
     const [lat, long] = searchData.value.split(" ");
-    const weatherFetch = fetch(`${WEATHER_API_URL}weather?appid=${WEATHER_API_KEY}&lat=${lat}&lon=${long}`);
-    const forecastFetch = fetch(`${WEATHER_API_URL}forecast?appid=${WEATHER_API_KEY}&lat=${lat}&lon=${long}`);
+    const weatherFetch = fetch(
+      `${WEATHER_API_URL}weather?appid=${WEATHER_API_KEY}&lat=${lat}&lon=${long}&units=metric`
+    );
+    const forecastFetch = fetch(
+      `${WEATHER_API_URL}forecast?appid=${WEATHER_API_KEY}&lat=${lat}&lon=${long}&units=metric`
+    );
 
     // AJAX
 
@@ -37,7 +41,7 @@ function App() {
       <h1>Cheese</h1>
       <Search onSearchChange={handleOnSearchChange} />
       {/* Activates when full country is entered in the AsycPaginate */}
-      <CurrentWeather />
+      {cityWeather && <CurrentWeather data={cityWeather} />}
     </>
   );
 }
