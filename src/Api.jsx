@@ -1,3 +1,4 @@
+// City API
 export const geoApiOptions = {
   method: "GET",
   headers: {
@@ -6,12 +7,8 @@ export const geoApiOptions = {
     "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
   },
 };
-
 export const GEO_API_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo";
-try {
-  const response = await fetch(GEO_API_URL, geoApiOptions);
-  const result = await response.text();
-  console.log(result);
-} catch (error) {
-  console.error(error);
-}
+
+// weather API
+export const WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/";
+export const WEATHER_API_KEY = "4870d4ec1cc6a1181071130c9dc58e66";
