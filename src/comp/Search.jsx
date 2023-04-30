@@ -15,7 +15,7 @@ export default function Search({ onSearchChange }) {
   const handleOnChange = (searchData) => {
     setSearch(searchData);
     onSearchChange(searchData);
-    // activate when search Data is retrieve
+    // activate when search <Data>  </Data> is retrieve
   };
 
   const loadOptions = (inputValue) => {

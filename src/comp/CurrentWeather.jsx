@@ -1,5 +1,7 @@
+import PropTypes from "prop-types";
+import "../css/currentWeather.css";
+
 export default function CurrentWeather({ data }) {
-  console.log(data.wind.speed);
   const weatherIcon = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
   return (
     <div>
@@ -11,7 +13,7 @@ export default function CurrentWeather({ data }) {
       <div className="bottom">
         <p className="temperature">{Math.floor(data.main.temp)}°</p>
         <div className="details">
-          <ul>
+          <ul className="weather-details">
             <li>
               <p>Feels Like</p>
               <p>{Math.floor(data.main.feels_like)}°</p>
@@ -40,3 +42,24 @@ export default function CurrentWeather({ data }) {
     </div>
   );
 }
+CurrentWeather.propTypes = {
+  data: PropTypes.shape({
+    city: PropTypes.string.isRequired,
+    weather: PropTypes.arrayOf(
+      PropTypes.shape({
+        icon: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    main: PropTypes.shape({
+      temp: PropTypes.number.isRequired,
+      feels_like: PropTypes.number.isRequired,
+      humidity: PropTypes.number.isRequired,
+      pressure: PropTypes.number.isRequired,
+    }).isRequired,
+    wind: PropTypes.shape({
+      speed: PropTypes.number.isRequired,
+      deg: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
