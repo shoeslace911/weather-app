@@ -3,6 +3,7 @@ import CurrentWeather from "./comp/CurrentWeather";
 import Search from "./comp/Search";
 import { WEATHER_API_KEY, WEATHER_API_URL } from "./Api";
 import { useState } from "react";
+import Forecast from "./comp/Forecast";
 
 function App() {
   const [cityWeather, setCityWeather] = useState(null);
@@ -33,15 +34,13 @@ function App() {
       });
   };
 
-  console.log("city weather", cityWeather);
-  console.log("city forecast", cityForecast);
-
   return (
     <>
       <h1>Cheese</h1>
       <Search onSearchChange={handleOnSearchChange} />
       {/* Activates when full country is entered in the AsycPaginate */}
       {cityWeather && <CurrentWeather data={cityWeather} />}
+      {cityForecast && <Forecast data={cityForecast} />}
     </>
   );
 }
