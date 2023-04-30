@@ -8,7 +8,7 @@ export default function Forecast({ data }) {
     let extractedDates = data.list;
     let formattedDateAndTimes = [];
     extractedDates.map((extractedDate) => {
-      // console.log(extractedDate);
+      // console.log(extractedDate.weather[0].main);
       // format date to look nice
       const dateString = extractedDate.dt_txt.split(" ")[0];
       const date = new Date(dateString);
@@ -19,11 +19,12 @@ export default function Forecast({ data }) {
 
       // format time to look nice
       let formattedTime = extractedDate.dt_txt.split(" ")[1].slice(0, 5);
-
+      let weather = extractedDate.weather[0].main;
       if (formattedTime !== "00:00") {
         formattedDateAndTimes.push({
           date: formattedDate,
           time: formattedTime,
+          weather: weather,
           key: crypto.randomUUID(),
         });
       }
@@ -40,6 +41,7 @@ export default function Forecast({ data }) {
         <div key={dateAndTime.key}>
           <p>Date: {dateAndTime.date}</p>
           <p>Time: {dateAndTime.time}</p>
+          <p>Weather: {dateAndTime.weather}</p>
         </div>
       ))}
     </div>
