@@ -3,6 +3,7 @@ import "../css/currentWeather.css";
 
 export default function CurrentWeather({ data }) {
   const weatherIcon = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+  // console.log(data);
   return (
     <div>
       <div className="top">
