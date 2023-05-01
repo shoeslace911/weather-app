@@ -2,7 +2,7 @@ import "./App.css";
 import CurrentWeather from "./comp/CurrentWeather";
 import Search from "./comp/Search";
 import { WEATHER_API_KEY, WEATHER_API_URL } from "./Api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Forecast from "./comp/Forecast";
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
   const [cityForecast, setCityForecast] = useState(null);
 
   const handleOnSearchChange = (searchData) => {
+    localStorage.setItem("searchData", JSON.stringify(searchData));
     const [lat, long] = searchData.value.split(" ");
     const weatherFetch = fetch(
       `${WEATHER_API_URL}weather?appid=${WEATHER_API_KEY}&lat=${lat}&lon=${long}&units=metric`
@@ -33,6 +34,14 @@ function App() {
         console.log("error is", err);
       });
   };
+
+  // save to local storage
+  useEffect(() => {
+    const savedData = localStorage.getItem("searchData");
+    if (savedData) {
+      handleOnSearchChange(JSON.parse(savedData));
+    }
+  }, []);
 
   return (
     <>
