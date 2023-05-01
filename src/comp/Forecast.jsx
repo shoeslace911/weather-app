@@ -7,6 +7,8 @@ export default function Forecast({ data }) {
   useEffect(() => {
     let extractedDates = data.list;
     let formattedDateAndTimes = [];
+    let timeArray = [];
+
     extractedDates.map((extractedDate) => {
       // console.log(extractedDate.weather[0].main);
       // format date to look nice
@@ -20,18 +22,26 @@ export default function Forecast({ data }) {
       // format time to look nice
       let formattedTime = extractedDate.dt_txt.split(" ")[1].slice(0, 5);
       let weather = extractedDate.weather[0].main;
-      if (formattedTime !== "00:00") {
-        formattedDateAndTimes.push({
-          date: formattedDate,
-          time: formattedTime,
-          weather: weather,
-          key: crypto.randomUUID(),
-        });
+      if (formattedTime == "00:00") {
+        {
+          formattedDateAndTimes.push({
+            date: formattedDate,
+            key: crypto.randomUUID(),
+            time: [timeArray],
+            weather: weather,
+          });
+        }
+        timeArray = [];
+      } else {
+        timeArray.push(formattedTime);
+        return;
       }
     });
 
     setDateAndTimes(formattedDateAndTimes);
+    console.log(dateAndTimes);
   }, []);
+
   return (
     // loop over until time is 0000
 
