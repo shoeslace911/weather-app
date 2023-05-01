@@ -52,8 +52,8 @@ export default function Forecast({ data }) {
       {dateAndTimes.map((dateAndTime) => (
         <div key={dateAndTime.key}>
           <p>Date: {dateAndTime.date}</p>
-          <p>Time: {dateAndTime.time}</p>
-          <p>Weather: {dateAndTime.weather}</p>
+          <p>Time: {dateAndTime.time + " "}</p>
+          <p>Weather: {dateAndTime.weather + " "}</p>
         </div>
       ))}
     </div>
