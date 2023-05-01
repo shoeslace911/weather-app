@@ -42,6 +42,7 @@ export default function Forecast({ data }) {
     });
 
     setDateAndTimes(formattedDateAndTimes);
+    console.log(formattedDateAndTimes);
   }, []);
 
   return (
