@@ -8,9 +8,10 @@ export default function Forecast({ data }) {
     let extractedDates = data.list;
     let formattedDateAndTimes = [];
     let timeArray = [];
+    let weatherArray = [];
 
     extractedDates.map((extractedDate) => {
-      // console.log(extractedDate.weather[0].main);
+      // console.log(extractedDate);
       // format date to look nice
       const dateString = extractedDate.dt_txt.split(" ")[0];
       const date = new Date(dateString);
@@ -28,18 +29,19 @@ export default function Forecast({ data }) {
             date: formattedDate,
             key: crypto.randomUUID(),
             time: [timeArray],
-            weather: weather,
+            weather: [weatherArray],
           });
         }
         timeArray = [];
+        weatherArray = [];
       } else {
         timeArray.push(formattedTime);
+        weatherArray.push(weather);
         return;
       }
     });
 
     setDateAndTimes(formattedDateAndTimes);
-    console.log(dateAndTimes);
   }, []);
 
   return (
