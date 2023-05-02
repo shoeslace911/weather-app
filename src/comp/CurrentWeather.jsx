@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import "../css/currentWeather.css";
 import { useEffect, useState } from "react";
+import { Slider } from "@mui/material";
 
 export default function CurrentWeather({ data, forecastData }) {
   let [dailyWeather, setDailyWeather] = useState([]);
@@ -30,6 +31,15 @@ export default function CurrentWeather({ data, forecastData }) {
     setDailyWeather(dailyWeatherArray);
     setDailyTemp(tempArray);
   }, [data]);
+
+  let [sliderValue, setSliderValue] = useState(10);
+  let [arrayNum, setArrayNum] = useState(0);
+  const valueText = (value) => {
+    let num = Number(String(sliderValue).replace("0", ""));
+    setSliderValue(value);
+    setArrayNum(num);
+  };
+
   return (
     <div>
       <div className="top">
@@ -38,7 +48,7 @@ export default function CurrentWeather({ data, forecastData }) {
         <h3 className="weather-desc">{data.weather[0].description}</h3>
       </div>
       <div className="bottom">
-        <p className="temperature">{dailyTemp}</p>
+        <p className="temperature">{dailyTemp[arrayNum]}</p>
         <div className="details">
           <ul className="weather-details">
             <li>
@@ -66,9 +76,21 @@ export default function CurrentWeather({ data, forecastData }) {
           </ul>
         </div>
         <div className="time-container">
-          <div className="time">{dailyWeather}</div>
-          <div className="time-slider">{dailyTime}</div>
+          <div className="time">{dailyWeather[arrayNum]}</div>
+          <div className="time-slider">{dailyTime[arrayNum]}</div>
+          <Slider
+            aria-label="Temperature"
+            defaultValue={10}
+            getAriaValueText={valueText}
+            // valueLabelDisplay="off"
+            step={10}
+            marks
+            min={10}
+            max={(dailyWeather.length - 1) * 10}
+          />
         </div>
+
+        <div className="time-slider">{dailyTime}</div>
       </div>
     </div>
   );
