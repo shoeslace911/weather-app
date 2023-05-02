@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function Forecast({ data }) {
   let [dateAndTimes, setDateAndTimes] = useState([]);
-  // console.log(data.list);
+  // console.log(data);
   useEffect(() => {
     let extractedDates = data.list;
     let formattedDateAndTimes = [];

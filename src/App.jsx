@@ -48,7 +48,7 @@ function App() {
       <h1>Cheese</h1>
       <Search onSearchChange={handleOnSearchChange} />
       {/* Activates when full country is entered in the AsycPaginate */}
-      {cityWeather && <CurrentWeather data={cityWeather} />}
+      {cityWeather && <CurrentWeather data={cityWeather} forecastData={cityForecast} />}
       {cityForecast && <Forecast data={cityForecast} />}
     </>
   );
