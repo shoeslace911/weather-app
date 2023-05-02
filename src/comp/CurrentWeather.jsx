@@ -11,6 +11,7 @@ export default function CurrentWeather({ data, forecastData }) {
   let dailyTimeArray = [];
   let dailyWeatherArray = [];
   let tempArray = [];
+  let dailyWeatherLength = dailyWeather.length - 1;
 
   useEffect(() => {
     let dates = forecastData.list;
@@ -82,11 +83,10 @@ export default function CurrentWeather({ data, forecastData }) {
             aria-label="Temperature"
             defaultValue={10}
             getAriaValueText={valueText}
-            // valueLabelDisplay="off"
             step={10}
             marks
             min={10}
-            max={(dailyWeather.length - 1) * 10}
+            max={dailyWeatherLength * 10}
           />
         </div>
 
@@ -114,5 +114,20 @@ CurrentWeather.propTypes = {
       speed: PropTypes.number.isRequired,
       deg: PropTypes.number.isRequired,
     }).isRequired,
+  }).isRequired,
+  forecastData: PropTypes.shape({
+    list: PropTypes.arrayOf(
+      PropTypes.shape({
+        dt_txt: PropTypes.string.isRequired,
+        weather: PropTypes.arrayOf(
+          PropTypes.shape({
+            main: PropTypes.string.isRequired,
+          })
+        ).isRequired,
+        main: PropTypes.shape({
+          temp: PropTypes.number.isRequired,
+        }).isRequired,
+      })
+    ).isRequired,
   }).isRequired,
 };
