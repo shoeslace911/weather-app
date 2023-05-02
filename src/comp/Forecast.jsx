@@ -18,9 +18,9 @@ export default function Forecast({ data }) {
       const day = date.getDate();
       const year = date.getFullYear();
       const formattedDate = `${month}/${day}/${year}`;
-
       // format time to look nice
       let formattedTime = extractedDate.dt_txt.split(" ")[1].slice(0, 5);
+      // weather and temp
       let weather = extractedDate.weather[0].main;
       let temp = `${Math.floor(extractedDate.main.temp)}°`;
       if (formattedTime == "00:00") {
