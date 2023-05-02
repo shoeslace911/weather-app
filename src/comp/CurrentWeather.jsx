@@ -3,24 +3,28 @@ import "../css/currentWeather.css";
 import { useEffect, useState } from "react";
 
 export default function CurrentWeather({ data, forecastData }) {
+  let [dailyWeather, setDailyWeather] = useState([]);
   let [dailyTime, setDailyTime] = useState([]);
   const weatherIcon = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
   let dailyTimeArray = [];
+  let dailyWeatherArray = [];
 
   useEffect(() => {
     let dates = forecastData.list;
     dates.some((date) => {
       let extractedTime = date.dt_txt.split(" ")[1].slice(0, 5);
+      let extractedWeather = date.weather[0].main;
       if (extractedTime !== "00:00") {
         dailyTimeArray.push(extractedTime);
+        dailyWeatherArray.push(extractedWeather);
         // exit map function immediately
       } else {
         return true;
       }
     });
     setDailyTime(dailyTimeArray);
+    setDailyWeather(dailyWeatherArray);
   }, [data]);
-  console.log(dailyTime);
   return (
     <div>
       <div className="top">
