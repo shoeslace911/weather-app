@@ -96,7 +96,9 @@ export default function CurrentWeather({ data, forecastData }) {
           />
         </div>
 
-        <div className="time-slider">{dailyTime}</div>
+        <div className="time-slider">
+          <p>{dailyTime}</p>
+        </div>
       </div>
     </div>
   );

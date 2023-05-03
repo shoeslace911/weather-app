@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { Slider } from "@mui/material";
 
 export default function Forecast({ data }) {
   let [dateAndTimes, setDateAndTimes] = useState([]);
@@ -47,6 +48,12 @@ export default function Forecast({ data }) {
     setDateAndTimes(formattedDateAndTimes);
   }, [data]);
 
+  let dailyTemp = dateAndTimes[0].temp[0];
+  let maxSlider = (maxArray) => {
+    return maxArray.length;
+  };
+  console.log(maxSlider(dailyTemp));
+
   return (
     // loop over until time is 0000
 
@@ -55,9 +62,18 @@ export default function Forecast({ data }) {
       {dateAndTimes.map((dateAndTime) => (
         <div key={dateAndTime.key}>
           <p>Date: {dateAndTime.date}</p>
+          <p>Temperature: {dateAndTime.temp + " "}</p>
           <p>Time: {dateAndTime.time + " "}</p>
           <p>Weather: {dateAndTime.weather + " "}</p>
-          <p>Temperature: {dateAndTime.temp + " "}</p>
+          <Slider
+            aria-label="Temperature"
+            defaultValue={10}
+            // getAriaValueText={}
+            step={10}
+            marks
+            min={0}
+            max={maxSlider(dailyTemp) * 10}
+          />
         </div>
       ))}
     </div>
