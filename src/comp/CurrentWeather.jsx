@@ -12,6 +12,7 @@ export default function CurrentWeather({ data, forecastData }) {
   let dailyWeatherArray = [];
   let tempArray = [];
   let dailyWeatherLength = dailyWeather.length - 1;
+  console.log(dailyWeatherLength);
 
   useEffect(() => {
     let dates = forecastData.list;
@@ -40,7 +41,6 @@ export default function CurrentWeather({ data, forecastData }) {
     setSliderValue(value);
     setArrayNum(num);
   };
-
   return (
     <div>
       <div className="top">
@@ -86,7 +86,7 @@ export default function CurrentWeather({ data, forecastData }) {
             step={10}
             marks
             min={10}
-            max={dailyWeatherLength * 10}
+            max={dailyWeatherLength < 0 ? 10 : dailyWeatherLength * 10}
           />
         </div>
 
