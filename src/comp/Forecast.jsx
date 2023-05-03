@@ -48,12 +48,7 @@ export default function Forecast({ data }) {
     setDateAndTimes(formattedDateAndTimes);
   }, [data]);
 
-  let dailyTemp = dateAndTimes[0].temp[0];
-  let maxSlider = (maxArray) => {
-    return maxArray.length;
-  };
-  console.log(maxSlider(dailyTemp));
-
+  // console.log(maxSlider(timeLength));
   return (
     // loop over until time is 0000
 
@@ -71,8 +66,8 @@ export default function Forecast({ data }) {
             // getAriaValueText={}
             step={10}
             marks
-            min={0}
-            max={maxSlider(dailyTemp) * 10}
+            min={10}
+            max={(dateAndTime < 0 ? dateAndTime[0].time[0] : 7) * 10}
           />
         </div>
       ))}
