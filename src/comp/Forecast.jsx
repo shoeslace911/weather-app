@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { Slider } from "@mui/material";
 
 export default function Forecast({ data }) {
   let [dateAndTimes, setDateAndTimes] = useState([]);
@@ -10,6 +11,7 @@ export default function Forecast({ data }) {
     let timeArray = [];
     let weatherArray = [];
     let tempArray = [];
+    let id = 1;
     extractedDates.map((extractedDate) => {
       // format date to look nice
       const dateString = extractedDate.dt_txt.split(" ")[0];
@@ -27,7 +29,7 @@ export default function Forecast({ data }) {
         {
           formattedDateAndTimes.push({
             date: formattedDate,
-            key: crypto.randomUUID(),
+            id: id,
             time: [timeArray],
             weather: [weatherArray],
             temp: [tempArray],
@@ -36,6 +38,7 @@ export default function Forecast({ data }) {
         timeArray = [];
         weatherArray = [];
         tempArray = [];
+        return id++;
       } else {
         timeArray.push(formattedTime);
         weatherArray.push(weather);
@@ -47,17 +50,39 @@ export default function Forecast({ data }) {
     setDateAndTimes(formattedDateAndTimes);
   }, [data]);
 
+  // slider things
+  let [sliderValue, setSliderValue] = useState(10);
+  let [arrayNum, setArrayNum] = useState(0);
+  const valueText = (value) => {
+    let num = Number(String(sliderValue).replace("0", ""));
+    setSliderValue(value);
+    setArrayNum(num);
+  };
+
+  // key
+
   return (
     // loop over until time is 0000
 
     <div>
       <h1>4 day forecast</h1>
       {dateAndTimes.map((dateAndTime) => (
-        <div key={dateAndTime.key}>
+        <div key={dateAndTime.id}>
+          {/* change depending if dateAndTimes key == this key */}
           <p>Date: {dateAndTime.date}</p>
-          <p>Time: {dateAndTime.time + " "}</p>
-          <p>Weather: {dateAndTime.weather + " "}</p>
-          <p>Temperature: {dateAndTime.temp + " "}</p>
+          <p>Temperature: {dateAndTime.temp[0][arrayNum] + " "}</p>
+          <p>Time: {dateAndTime.time[0][arrayNum] + " "}</p>
+          <p>Weather: {dateAndTime.weather[0][arrayNum] + " "}</p>
+          <Slider
+            aria-label="Temperature"
+            defaultValue={10}
+            getAriaValueText={valueText}
+            step={10}
+            marks
+            min={10}
+            max={(dateAndTime < 0 ? dateAndTime[0].time[0] : 7) * 10}
+            key={dateAndTime.id}
+          />
         </div>
       ))}
     </div>

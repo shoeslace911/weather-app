@@ -41,6 +41,12 @@ export default function CurrentWeather({ data, forecastData }) {
     setArrayNum(num);
   };
 
+  let dailyFeels = forecastData.list[arrayNum].main.feels_like;
+  let dailyPressure = forecastData.list[arrayNum].main.pressure;
+  let dailyHumidity = forecastData.list[arrayNum].main.humidity;
+  let dailyWindSpeed = forecastData.list[arrayNum].wind.speed;
+  let dailyWindDeg = forecastData.list[arrayNum].wind.deg;
+
   return (
     <div>
       <div className="top">
@@ -54,25 +60,25 @@ export default function CurrentWeather({ data, forecastData }) {
           <ul className="weather-details">
             <li>
               <p>Feels Like</p>
-              <p>{Math.floor(data.main.feels_like)}°</p>
+              <p>{Math.floor(dailyFeels)}°</p>
             </li>
             <li>
               <div>
                 <p>Wind</p>
-                <p>{data.wind.speed} m/s</p>
+                <p>{dailyWindSpeed} m/s</p>
               </div>
               <div>
                 <p>Degrees</p>
-                <p>{data.wind.deg}°</p>
+                <p>{dailyWindDeg}°</p>
               </div>
             </li>
             <li>
               <p>Humidity</p>
-              <p>{data.main.humidity}%</p>
+              <p>{dailyHumidity}%</p>
             </li>
             <li>
               <p>Pressure</p>
-              <p>{data.main.pressure}</p>
+              <p>{dailyPressure}</p>
             </li>
           </ul>
         </div>
@@ -85,12 +91,14 @@ export default function CurrentWeather({ data, forecastData }) {
             getAriaValueText={valueText}
             step={10}
             marks
-            min={10}
-            max={dailyWeatherLength * 10}
+            min={0}
+            max={dailyWeatherLength < 0 ? 10 : dailyWeatherLength * 10}
           />
         </div>
 
-        <div className="time-slider">{dailyTime}</div>
+        <div className="time-slider">
+          <p>{dailyTime}</p>
+        </div>
       </div>
     </div>
   );
