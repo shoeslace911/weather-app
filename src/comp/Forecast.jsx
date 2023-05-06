@@ -33,6 +33,7 @@ export default function Forecast({ data }) {
             time: [timeArray],
             weather: [weatherArray],
             temp: [tempArray],
+            selectedIndex: 0,
           });
         }
         timeArray = [];
@@ -51,37 +52,44 @@ export default function Forecast({ data }) {
   }, [data]);
 
   // slider things
-  let [sliderValue, setSliderValue] = useState(10);
-  let [arrayNum, setArrayNum] = useState(0);
+  let [index, setIndex] = useState(0);
   const valueText = (value) => {
-    let num = Number(String(sliderValue).replace("0", ""));
-    setSliderValue(value);
-    setArrayNum(num);
+    let num = Number(String(value).replace("0", ""));
+    setIndex(num);
   };
 
   // key
-
+  const toggleChange = (id) => {
+    const updatedArray = dateAndTimes.map((item) => {
+      if (item.id == id) {
+        return { ...item, selectedIndex: index };
+      }
+      return item;
+    });
+    setDateAndTimes(updatedArray);
+  };
   return (
-    // loop over until time is 0000
-
     <div>
       <h1>4 day forecast</h1>
       {dateAndTimes.map((dateAndTime) => (
         <div key={dateAndTime.id}>
           {/* change depending if dateAndTimes key == this key */}
           <p>Date: {dateAndTime.date}</p>
-          <p>Temperature: {dateAndTime.temp[0][arrayNum] + " "}</p>
-          <p>Time: {dateAndTime.time[0][arrayNum] + " "}</p>
-          <p>Weather: {dateAndTime.weather[0][arrayNum] + " "}</p>
+          <p>Temperature: {dateAndTime.temp[0][dateAndTime.selectedIndex]}</p>
+          <p>Time: {dateAndTime.time[0][dateAndTime.selectedIndex]}</p>
+          <p>Weather: {dateAndTime.weather[0][dateAndTime.selectedIndex]}</p>
           <Slider
-            aria-label="Temperature"
+            aria-label="Time"
             defaultValue={10}
-            getAriaValueText={valueText}
             step={10}
             marks
             min={10}
             max={(dateAndTime < 0 ? dateAndTime[0].time[0] : 7) * 10}
-            key={dateAndTime.id}
+            key={dateAndTime.id + "slider"}
+            onChangeCommitted={(event, value) => {
+              toggleChange(dateAndTime.id);
+              valueText(value);
+            }}
           />
         </div>
       ))}
