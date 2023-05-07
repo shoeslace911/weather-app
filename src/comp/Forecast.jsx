@@ -52,9 +52,12 @@ export default function Forecast({ data }) {
   }, [data]);
 
   // key
+  let [sliderLength, setSliderLength] = useState(0);
   const toggleChange = (id, value) => {
     const updatedArray = dateAndTimes.map((item) => {
       if (item.id == id) {
+        console.log(sliderLength);
+        setSliderLength(item.time[0].length);
         return { ...item, selectedIndex: value };
       }
       return item;
@@ -78,9 +81,9 @@ export default function Forecast({ data }) {
             step={10}
             marks
             min={10}
-            max={(dateAndTime < 0 ? dateAndTime[0].time[0] : 7) * 10}
-            key={dateAndTime.id + "slider"}
-            onChangeCommitted={(event, value) => {
+            max={(sliderLength <= 0 ? 0 : sliderLength) * 10}
+            key={dateAndTime.id}
+            onChange={(event, value) => {
               toggleChange(dateAndTime.id, Number(String(value).replace("0", "")) - 1);
             }}
           />
