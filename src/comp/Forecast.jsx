@@ -51,18 +51,11 @@ export default function Forecast({ data }) {
     setDateAndTimes(formattedDateAndTimes);
   }, [data]);
 
-  // slider things
-  let [index, setIndex] = useState(0);
-  const valueText = (value) => {
-    let num = Number(String(value).replace("0", ""));
-    setIndex(num);
-  };
-
   // key
-  const toggleChange = (id) => {
+  const toggleChange = (id, value) => {
     const updatedArray = dateAndTimes.map((item) => {
       if (item.id == id) {
-        return { ...item, selectedIndex: index };
+        return { ...item, selectedIndex: value };
       }
       return item;
     });
@@ -78,6 +71,7 @@ export default function Forecast({ data }) {
           <p>Temperature: {dateAndTime.temp[0][dateAndTime.selectedIndex]}</p>
           <p>Time: {dateAndTime.time[0][dateAndTime.selectedIndex]}</p>
           <p>Weather: {dateAndTime.weather[0][dateAndTime.selectedIndex]}</p>
+
           <Slider
             aria-label="Time"
             defaultValue={10}
@@ -87,8 +81,7 @@ export default function Forecast({ data }) {
             max={(dateAndTime < 0 ? dateAndTime[0].time[0] : 7) * 10}
             key={dateAndTime.id + "slider"}
             onChangeCommitted={(event, value) => {
-              toggleChange(dateAndTime.id);
-              valueText(value);
+              toggleChange(dateAndTime.id, Number(String(value).replace("0", "")) - 1);
             }}
           />
         </div>
