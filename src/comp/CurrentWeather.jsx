@@ -23,7 +23,6 @@ export default function CurrentWeather({ data, forecastData }) {
         dailyTimeArray.push(extractedTime);
         dailyWeatherArray.push(extractedWeather);
         tempArray.push(extractedTemp);
-        // exit map function immediately
       } else {
         return true;
       }

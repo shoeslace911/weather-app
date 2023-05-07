@@ -71,7 +71,7 @@ export default function Forecast({ data }) {
           <p>Temperature: {dateAndTime.temp[0][dateAndTime.selectedIndex]}</p>
           <p>Time: {dateAndTime.time[0][dateAndTime.selectedIndex]}</p>
           <p>Weather: {dateAndTime.weather[0][dateAndTime.selectedIndex]}</p>
-          {console.log(dateAndTime.time[0])}
+
           <Slider
             aria-label="Time"
             defaultValue={10}
