@@ -56,7 +56,6 @@ export default function Forecast({ data }) {
   const toggleChange = (id, value) => {
     const updatedArray = dateAndTimes.map((item) => {
       if (item.id == id) {
-        console.log(sliderLength);
         setSliderLength(item.time[0].length);
         return { ...item, selectedIndex: value };
       }
