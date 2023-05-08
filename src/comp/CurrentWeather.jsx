@@ -13,6 +13,15 @@ export default function CurrentWeather({ data, forecastData }) {
   let tempArray = [];
   let dailyWeatherLength = dailyWeather.length - 1;
 
+  // date
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  let today = data.dt;
+  let date = new Date(today * 1000);
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let year = date.getFullYear();
+  let dayOfWeek = daysOfWeek[date.getDay()];
+  let todayDate = `${dayOfWeek}, ${month}/${day}/${year}`;
   useEffect(() => {
     let dates = forecastData.list;
     dates.some((date) => {
@@ -51,6 +60,7 @@ export default function CurrentWeather({ data, forecastData }) {
       <div className="top">
         <img src={weatherIcon} alt="weather-icon" style={{ width: "10%" }} />
         <h2 className="city">{data.city}</h2>
+        <h2 className="city-time">{todayDate}</h2>
         <h3 className="weather-desc">{data.weather[0].description}</h3>
       </div>
       <div className="bottom">

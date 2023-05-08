@@ -4,7 +4,6 @@ import { Slider } from "@mui/material";
 
 export default function Forecast({ data }) {
   let [dateAndTimes, setDateAndTimes] = useState([]);
-  console.log(data);
   useEffect(() => {
     let extractedDates = data.list;
     let formattedDateAndTimes = [];
@@ -15,12 +14,14 @@ export default function Forecast({ data }) {
     let id = 1;
     extractedDates.map((extractedDate) => {
       // format date to look nice
+      const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       const dateString = extractedDate.dt_txt.split(" ")[0];
       const date = new Date(dateString);
       const month = date.getMonth() + 1;
       const day = date.getDate();
       const year = date.getFullYear();
-      const formattedDate = `${month}/${day}/${year}`;
+      const dayOfWeek = daysOfWeek[date.getDay()];
+      const formattedDate = `${dayOfWeek}, ${month}/${day}/${year}`;
       // format time to look nice
       let formattedTime = extractedDate.dt_txt.split(" ")[1].slice(0, 5);
       // weather and temp
