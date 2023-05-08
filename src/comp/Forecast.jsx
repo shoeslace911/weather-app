@@ -86,7 +86,7 @@ export default function Forecast({ data }) {
   };
   return (
     <div>
-      <h1>4 day forecast</h1>
+      <h1>5 day forecast</h1>
       {dateAndTimes.map((dateAndTime) => (
         <div key={dateAndTime.id}>
           {/* change depending if dateAndTimes key == this key */}

@@ -36,14 +36,19 @@ export default function CurrentWeather({ data, forecastData }) {
   let today = (dayOfWeek, `${day}, ${convertedTime.getDate()} ${convertedTime.getFullYear()}`);
 
   //time
-  let [currentTime, setCurrentTime] = useState("");
+  let [hours, setHours] = useState(0);
 
-  let now = new Date();
-  let offset = timeZone + now.getTimezoneOffset() * 60;
-  let date = new Date(now.getTime() + offset * 1000);
-  let hours = date.getHours().toString().padStart(2, "0");
-  let minutes = date.getMinutes().toString().padStart(2, "0");
-  let seconds = now.getSeconds().toString().padStart(2, "0");
+  let [minutes, setMinutes] = useState(0);
+
+  let [seconds, setSeconds] = useState(0);
+  setTimeout(() => {
+    let now = new Date();
+    let offset = timeZone + now.getTimezoneOffset() * 60;
+    let date = new Date(now.getTime() + offset * 1000);
+    setHours(date.getHours().toString().padStart(2, "0"));
+    setMinutes(date.getMinutes().toString().padStart(2, "0"));
+    setSeconds(now.getSeconds().toString().padStart(2, "0"));
+  }, 1000);
 
   useEffect(() => {
     let dates = forecastData.list;
@@ -83,7 +88,9 @@ export default function CurrentWeather({ data, forecastData }) {
       <div className="top">
         <img src={weatherIcon} alt="weather-icon" style={{ width: "10%" }} />
         <h2 className="city">{data.city}</h2>
-        <h2 className="time">{`${hours}:${minutes}`}</h2>
+        <h2 className="time">
+          {hours}:{minutes}:{seconds}
+        </h2>
         <h2 className="city-time">{today}</h2>
         <h3 className="weather-desc">{data.weather[0].description}</h3>
       </div>
