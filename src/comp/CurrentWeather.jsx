@@ -13,6 +13,38 @@ export default function CurrentWeather({ data, forecastData }) {
   let tempArray = [];
   let dailyWeatherLength = dailyWeather.length - 1;
 
+  // date & time
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const monthsOfYear = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let timeZone = data.timezone;
+  let convertedTime = new Date(Date.now() + timeZone / 3600);
+  let dayOfWeek = daysOfWeek[convertedTime.getDay()];
+  let day = monthsOfYear[convertedTime.getMonth()];
+  let today = (dayOfWeek, `${day}, ${convertedTime.getDate()} ${convertedTime.getFullYear()}`);
+
+  //time
+  let [currentTime, setCurrentTime] = useState("");
+
+  let now = new Date();
+  let offset = timeZone + now.getTimezoneOffset() * 60;
+  let date = new Date(now.getTime() + offset * 1000);
+  let hours = date.getHours().toString().padStart(2, "0");
+  let minutes = date.getMinutes().toString().padStart(2, "0");
+  let seconds = now.getSeconds().toString().padStart(2, "0");
+
   useEffect(() => {
     let dates = forecastData.list;
     dates.some((date) => {
@@ -51,6 +83,8 @@ export default function CurrentWeather({ data, forecastData }) {
       <div className="top">
         <img src={weatherIcon} alt="weather-icon" style={{ width: "10%" }} />
         <h2 className="city">{data.city}</h2>
+        <h2 className="time">{`${hours}:${minutes}`}</h2>
+        <h2 className="city-time">{today}</h2>
         <h3 className="weather-desc">{data.weather[0].description}</h3>
       </div>
       <div className="bottom">
