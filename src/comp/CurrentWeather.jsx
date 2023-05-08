@@ -7,7 +7,7 @@ export default function CurrentWeather({ data, forecastData }) {
   let [dailyWeather, setDailyWeather] = useState([]);
   let [dailyTime, setDailyTime] = useState([]);
   let [dailyTemp, setDailyTemp] = useState([]);
-  let weatherIcon = "../img/icon/01d.png";
+  let weatherIcon = `/src/img/icon/${data.weather[0].icon}.png`;
   let dailyTimeArray = [];
   let dailyWeatherArray = [];
   let tempArray = [];
@@ -86,7 +86,7 @@ export default function CurrentWeather({ data, forecastData }) {
   return (
     <div>
       <div className="top">
-        <img src={weatherIcon} alt="weather-icon" style={{ width: "100%" }} />
+        <img src={weatherIcon} alt="weather-icon" style={{ width: "10%" }} />
         <h2 className="city">{data.city}</h2>
         <h2 className="time">
           {hours}:{minutes}:{seconds}
