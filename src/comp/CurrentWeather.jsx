@@ -13,25 +13,44 @@ export default function CurrentWeather({ data, forecastData }) {
   let tempArray = [];
   let dailyWeatherLength = dailyWeather.length - 1;
 
-  // date
+  // date & time
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
+  const monthsOfYear = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   let timeZone = data.timezone;
   let convertedTime = new Date(Date.now() + timeZone / 3600);
-  let date = convertedTime.toLocaleDateString();
   let dayOfWeek = daysOfWeek[convertedTime.getDay()];
-
-  console.log(dayOfWeek, date);
+  let day = monthsOfYear[convertedTime.getMonth()];
+  let today = (dayOfWeek, `${day}, ${convertedTime.getDate()} ${convertedTime.getFullYear()}`);
 
   //time
-
+  function getTimeFromTimezone(timezone) {
+    const now = new Date();
+    const offset = timezone + now.getTimezoneOffset() * 60;
+    const date = new Date(now.getTime() + offset * 1000);
+    console.log(date.getSeconds());
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    return `${hours}:${minutes}`;
+  }
   useEffect(() => {
     let dates = forecastData.list;
     dates.some((date) => {
       let extractedTime = date.dt_txt.split(" ")[1].slice(0, 5);
       let extractedWeather = date.weather[0].main;
       let extractedTemp = `${Math.floor(date.main.temp)}°`;
-
       if (extractedTime !== "00:00") {
         dailyTimeArray.push(extractedTime);
         dailyWeatherArray.push(extractedWeather);
@@ -64,8 +83,8 @@ export default function CurrentWeather({ data, forecastData }) {
       <div className="top">
         <img src={weatherIcon} alt="weather-icon" style={{ width: "10%" }} />
         <h2 className="city">{data.city}</h2>
-        <h2 className="time">Time</h2>
-        <h2 className="city-time">Sunday, hitch</h2>
+        <h2 className="time">{getTimeFromTimezone(timeZone)}</h2>
+        <h2 className="city-time">{today}</h2>
         <h3 className="weather-desc">{data.weather[0].description}</h3>
       </div>
       <div className="bottom">
