@@ -4,11 +4,12 @@ import { Slider } from "@mui/material";
 
 export default function Forecast({ data }) {
   let [dateAndTimes, setDateAndTimes] = useState([]);
-  // console.log(data);
+  console.log(data);
   useEffect(() => {
     let extractedDates = data.list;
     let formattedDateAndTimes = [];
     let timeArray = [];
+    let feelsLikeArray = [];
     let weatherArray = [];
     let tempArray = [];
     let id = 1;
@@ -24,7 +25,9 @@ export default function Forecast({ data }) {
       let formattedTime = extractedDate.dt_txt.split(" ")[1].slice(0, 5);
       // weather and temp
       let weather = extractedDate.weather[0].main;
-      let temp = `${Math.floor(extractedDate.main.temp)}°`;
+      let floorFloat = (float) => {
+        return `${Math.floor(float)}°`;
+      };
       if (formattedTime == "00:00") {
         {
           formattedDateAndTimes.push({
@@ -33,17 +36,20 @@ export default function Forecast({ data }) {
             time: [timeArray],
             weather: [weatherArray],
             temp: [tempArray],
+            feelsLike: [feelsLikeArray],
             selectedIndex: 0,
           });
         }
         timeArray = [];
         weatherArray = [];
         tempArray = [];
+        feelsLikeArray = [];
         return id++;
       } else {
         timeArray.push(formattedTime);
         weatherArray.push(weather);
-        tempArray.push(temp);
+        tempArray.push(floorFloat(extractedDate.main.temp));
+        feelsLikeArray.push(floorFloat(extractedDate.main.feels_like));
         return;
       }
     });
@@ -73,6 +79,7 @@ export default function Forecast({ data }) {
           <p>Temperature: {dateAndTime.temp[0][dateAndTime.selectedIndex]}</p>
           <p>Time: {dateAndTime.time[0][dateAndTime.selectedIndex]}</p>
           <p>Weather: {dateAndTime.weather[0][dateAndTime.selectedIndex]}</p>
+          <p>Feels like: {dateAndTime.feelsLike[0][dateAndTime.selectedIndex]}</p>
 
           <Slider
             aria-label="Time"
