@@ -15,19 +15,23 @@ export default function CurrentWeather({ data, forecastData }) {
 
   // date
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  let today = data.dt;
-  let date = new Date(today * 1000);
-  let month = date.getMonth() + 1;
-  let day = date.getDate();
-  let year = date.getFullYear();
-  let dayOfWeek = daysOfWeek[date.getDay()];
-  let todayDate = `${dayOfWeek}, ${month}/${day}/${year}`;
+
+  let timeZone = data.timezone;
+  let convertedTime = new Date(Date.now() + timeZone / 3600);
+  let date = convertedTime.toLocaleDateString();
+  let dayOfWeek = daysOfWeek[convertedTime.getDay()];
+
+  console.log(dayOfWeek, date);
+
+  //time
+
   useEffect(() => {
     let dates = forecastData.list;
     dates.some((date) => {
       let extractedTime = date.dt_txt.split(" ")[1].slice(0, 5);
       let extractedWeather = date.weather[0].main;
       let extractedTemp = `${Math.floor(date.main.temp)}°`;
+
       if (extractedTime !== "00:00") {
         dailyTimeArray.push(extractedTime);
         dailyWeatherArray.push(extractedWeather);
@@ -60,7 +64,8 @@ export default function CurrentWeather({ data, forecastData }) {
       <div className="top">
         <img src={weatherIcon} alt="weather-icon" style={{ width: "10%" }} />
         <h2 className="city">{data.city}</h2>
-        <h2 className="city-time">{todayDate}</h2>
+        <h2 className="time">Time</h2>
+        <h2 className="city-time">Sunday, hitch</h2>
         <h3 className="weather-desc">{data.weather[0].description}</h3>
       </div>
       <div className="bottom">

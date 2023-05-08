@@ -15,13 +15,27 @@ export default function Forecast({ data }) {
     extractedDates.map((extractedDate) => {
       // format date to look nice
       const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const monthsOfYear = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
       const dateString = extractedDate.dt_txt.split(" ")[0];
       const date = new Date(dateString);
-      const month = date.getMonth() + 1;
+      const month = monthsOfYear[date.getMonth()];
       const day = date.getDate();
       const year = date.getFullYear();
       const dayOfWeek = daysOfWeek[date.getDay()];
-      const formattedDate = `${dayOfWeek}, ${month}/${day}/${year}`;
+      const formattedDate = `${dayOfWeek}, ${month} ${day} ${year}`;
       // format time to look nice
       let formattedTime = extractedDate.dt_txt.split(" ")[1].slice(0, 5);
       // weather and temp
