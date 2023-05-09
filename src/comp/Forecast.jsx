@@ -5,8 +5,7 @@ import { Slider } from "@mui/material";
 export default function Forecast({ data }) {
   let [dateAndTimes, setDateAndTimes] = useState([]);
 
-  // let weatherIcon = `/src/img/icon/${data.weather[0].icon}.png`;
-  console.log(data);
+  console.log(`/src/img/icon/${data.list[0].weather[0].icon}.png`);
   useEffect(() => {
     let extractedDates = data.list;
     let formattedDateAndTimes = [];
@@ -14,6 +13,7 @@ export default function Forecast({ data }) {
     let feelsLikeArray = [];
     let weatherArray = [];
     let tempArray = [];
+    let iconArray = [];
     let id = 1;
     extractedDates.map((extractedDate) => {
       // format date to look nice
@@ -55,6 +55,7 @@ export default function Forecast({ data }) {
             weather: [weatherArray],
             temp: [tempArray],
             feelsLike: [feelsLikeArray],
+            icon: [iconArray],
             selectedIndex: 0,
           });
         }
@@ -62,12 +63,14 @@ export default function Forecast({ data }) {
         weatherArray = [];
         tempArray = [];
         feelsLikeArray = [];
+        iconArray = [];
         return id++;
       } else {
         timeArray.push(formattedTime);
         weatherArray.push(weather);
         tempArray.push(floorFloat(extractedDate.main.temp));
         feelsLikeArray.push(floorFloat(extractedDate.main.feels_like));
+        iconArray.push(`/src/img/icon/${extractedDate.weather[0].icon}.png`);
         return;
       }
     });
@@ -98,7 +101,7 @@ export default function Forecast({ data }) {
           <p>Time: {dateAndTime.time[0][dateAndTime.selectedIndex]}</p>
           <p>Weather: {dateAndTime.weather[0][dateAndTime.selectedIndex]}</p>
           <p>Feels like: {dateAndTime.feelsLike[0][dateAndTime.selectedIndex]}</p>
-          <p>Icon</p>
+          <img src={dateAndTime.icon[0][dateAndTime.selectedIndex]} alt="weather-icon" />
           <Slider
             aria-label="Time"
             defaultValue={10}
