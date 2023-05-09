@@ -4,6 +4,9 @@ import { Slider } from "@mui/material";
 
 export default function Forecast({ data }) {
   let [dateAndTimes, setDateAndTimes] = useState([]);
+
+  // let weatherIcon = `/src/img/icon/${data.weather[0].icon}.png`;
+  console.log(data);
   useEffect(() => {
     let extractedDates = data.list;
     let formattedDateAndTimes = [];
@@ -86,7 +89,7 @@ export default function Forecast({ data }) {
   };
   return (
     <div>
-      <h1>4 day forecast</h1>
+      <h1>5 day forecast</h1>
       {dateAndTimes.map((dateAndTime) => (
         <div key={dateAndTime.id}>
           {/* change depending if dateAndTimes key == this key */}
@@ -95,7 +98,7 @@ export default function Forecast({ data }) {
           <p>Time: {dateAndTime.time[0][dateAndTime.selectedIndex]}</p>
           <p>Weather: {dateAndTime.weather[0][dateAndTime.selectedIndex]}</p>
           <p>Feels like: {dateAndTime.feelsLike[0][dateAndTime.selectedIndex]}</p>
-
+          <p>Icon</p>
           <Slider
             aria-label="Time"
             defaultValue={10}
