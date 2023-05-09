@@ -7,11 +7,15 @@ export default function CurrentWeather({ data, forecastData }) {
   let [dailyWeather, setDailyWeather] = useState([]);
   let [dailyTime, setDailyTime] = useState([]);
   let [dailyTemp, setDailyTemp] = useState([]);
-  let weatherIcon = `/src/img/icon/${data.weather[0].icon}.png`;
   let dailyTimeArray = [];
   let dailyWeatherArray = [];
   let tempArray = [];
+
+  //Slider
   let dailyWeatherLength = dailyWeather.length - 1;
+
+  //ICons
+  let weatherIcon = `/src/img/icon/${data.weather[0].icon}.png`;
 
   // date & time
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -82,6 +86,7 @@ export default function CurrentWeather({ data, forecastData }) {
   let dailyHumidity = forecastData.list[arrayNum].main.humidity;
   let dailyWindSpeed = forecastData.list[arrayNum].wind.speed;
   let dailyWindDeg = forecastData.list[arrayNum].wind.deg;
+  let dailyIcon = `/src/img/icon/${forecastData.list[arrayNum].weather[0].icon}.png`;
 
   return (
     <div>
@@ -96,6 +101,7 @@ export default function CurrentWeather({ data, forecastData }) {
       </div>
       <div className="bottom">
         <p className="temperature">{dailyTemp[arrayNum]}</p>
+
         <div className="details">
           <ul className="weather-details">
             <li>
@@ -125,6 +131,7 @@ export default function CurrentWeather({ data, forecastData }) {
         <div className="time-container">
           <div className="time">{dailyWeather[arrayNum]}</div>
           <div className="time-slider">{dailyTime[arrayNum]}</div>
+          <img src={dailyIcon} alt="weather-icon" style={{ width: "10%" }} />
           <Slider
             aria-label="Temperature"
             defaultValue={10}
@@ -143,6 +150,8 @@ export default function CurrentWeather({ data, forecastData }) {
     </div>
   );
 }
+
+// prop validations
 CurrentWeather.propTypes = {
   data: PropTypes.shape({
     city: PropTypes.string.isRequired,
