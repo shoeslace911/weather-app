@@ -5,7 +5,6 @@ import { Slider } from "@mui/material";
 export default function Forecast({ data }) {
   let [dateAndTimes, setDateAndTimes] = useState([]);
 
-  console.log(`/src/img/icon/${data.list[0].weather[0].icon}.png`);
   useEffect(() => {
     let extractedDates = data.list;
     let formattedDateAndTimes = [];
