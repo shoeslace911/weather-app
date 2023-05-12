@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import "../css/currentWeather.css";
 import { useEffect, useState } from "react";
 import { Slider } from "@mui/material";
 
@@ -91,6 +90,7 @@ export default function CurrentWeather({ data, forecastData }) {
   return (
     <div>
       <div className="top">
+        <h1 className="underline text-center">Hello world!</h1>
         <img src={weatherIcon} alt="weather-icon" style={{ width: "10%" }} />
         <h2 className="city">{data.city}</h2>
         <h2 className="time">
@@ -102,7 +102,7 @@ export default function CurrentWeather({ data, forecastData }) {
       <div className="bottom">
         <p className="temperature">{dailyTemp[arrayNum]}</p>
 
-        <div className="details">
+        <div className="details flex">
           <ul className="weather-details">
             <li>
               <p>Feels Like</p>
