@@ -34,7 +34,7 @@ export default function Search({ onSearchChange }) {
   };
 
   return (
-    <div>
+    <div className="w-1/2 text-center mx-auto text-black py-5 ">
       {/* STEP 1 get data from input */}
       <AsyncPaginate
         placeholder="Enter City"
