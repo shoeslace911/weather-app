@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import "../css/currentWeather.css";
 import { useEffect, useState } from "react";
 import { Slider } from "@mui/material";
 
@@ -85,67 +84,67 @@ export default function CurrentWeather({ data, forecastData }) {
   let dailyPressure = forecastData.list[arrayNum].main.pressure;
   let dailyHumidity = forecastData.list[arrayNum].main.humidity;
   let dailyWindSpeed = forecastData.list[arrayNum].wind.speed;
-  let dailyWindDeg = forecastData.list[arrayNum].wind.deg;
   let dailyIcon = `/src/img/icon/${forecastData.list[arrayNum].weather[0].icon}.png`;
 
   return (
     <div>
-      <div className="top">
-        <img src={weatherIcon} alt="weather-icon" style={{ width: "10%" }} />
-        <h2 className="city">{data.city}</h2>
-        <h2 className="time">
+      <div className="text-center pt-8">
+        <h2 className="text-6xl">{data.city}</h2>
+        <h2 className="text-5xl">
           {hours}:{minutes}:{seconds}
         </h2>
-        <h2 className="city-time">{today}</h2>
-        <h3 className="weather-desc">{data.weather[0].description}</h3>
+        <h2 className="text-xl">
+          {dayOfWeek}, {today}
+        </h2>
       </div>
-      <div className="bottom">
-        <p className="temperature">{dailyTemp[arrayNum]}</p>
-
-        <div className="details">
-          <ul className="weather-details">
-            <li>
-              <p>Feels Like</p>
-              <p>{Math.floor(dailyFeels)}°</p>
+      <div className="flex justify-center relative py-10">
+        <img src={dailyIcon} alt="weather-icon" className="w-56 -z-10 " />
+        <div className="my-auto px-6">
+          <h3 className="text-4xl capitalize">{data.weather[0].description}</h3>
+          <p className="text-4xl text-center">{dailyTemp[arrayNum]}</p>
+          <h2 className="city-time"></h2>
+        </div>
+        <div className="my-auto">
+          <ul className="flex ">
+            <li className="my-auto pr-6">
+              <p className="text-2xl">Feels Like</p>
+              <p className="text-center text-xl">{Math.floor(dailyFeels)}°</p>
             </li>
-            <li>
+            <li className="my-auto pr-6">
               <div>
-                <p>Wind</p>
-                <p>{dailyWindSpeed} m/s</p>
-              </div>
-              <div>
-                <p>Degrees</p>
-                <p>{dailyWindDeg}°</p>
+                <p className="text-2xl">Wind</p>
+                <p className="text-center text-xl">{dailyWindSpeed} m/s</p>
               </div>
             </li>
-            <li>
-              <p>Humidity</p>
-              <p>{dailyHumidity}%</p>
+            <li className="my-auto pr-6">
+              <p className="text-2xl">Humidity</p>
+              <p className="text-center text-xl">{dailyHumidity}%</p>
             </li>
-            <li>
-              <p>Pressure</p>
-              <p>{dailyPressure}</p>
+            <li className="my-auto ">
+              <p className="text-2xl">Pressure</p>
+              <p className="text-center text-xl">{dailyPressure}</p>
             </li>
           </ul>
         </div>
-        <div className="time-container">
-          <div className="time">{dailyWeather[arrayNum]}</div>
-          <div className="time-slider">{dailyTime[arrayNum]}</div>
-          <img src={dailyIcon} alt="weather-icon" style={{ width: "10%" }} />
-          <Slider
-            aria-label="Temperature"
-            defaultValue={10}
-            getAriaValueText={valueText}
-            step={10}
-            marks
-            min={0}
-            max={dailyWeatherLength < 0 ? 10 : dailyWeatherLength * 10}
-          />
-        </div>
-
-        <div className="time-slider">
-          <p>{dailyTime}</p>
-        </div>
+      </div>
+      <div className="text-center">
+        <Slider
+          aria-label="Temperature"
+          defaultValue={10}
+          getAriaValueText={valueText}
+          step={10}
+          marks
+          min={0}
+          max={dailyWeatherLength < 0 ? 10 : dailyWeatherLength * 10}
+          sx={{
+            color: "white",
+            width: 1200,
+            height: 15,
+          }}
+        />
+      </div>
+      <div>
+        <p className="text-3xl font-semibold text-center">{dailyTime}</p>
       </div>
     </div>
   );

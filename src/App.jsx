@@ -44,13 +44,13 @@ function App() {
   }, []);
 
   return (
-    <>
-      <h1>Cheese</h1>
+    <div className=" font-display text-white ">
+      <div className="bg-bgImg w-screen h-screen absolute -z-50 bg-cover brightness-75 content-['*']"></div>
       <Search onSearchChange={handleOnSearchChange} />
       {/* Activates when full country is entered in the AsycPaginate */}
       {cityWeather && <CurrentWeather data={cityWeather} forecastData={cityForecast} />}
       {cityForecast && <Forecast data={cityForecast} />}
-    </>
+    </div>
   );
 }
 
