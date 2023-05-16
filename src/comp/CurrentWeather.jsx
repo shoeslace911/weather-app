@@ -88,7 +88,7 @@ export default function CurrentWeather({ data, forecastData }) {
   let dailyIcon = `/src/img/icon/${forecastData.list[arrayNum].weather[0].icon}.png`;
 
   return (
-    <div>
+    <div className="text-white">
       <div className="top">
         <h1 className="underline text-center">Hello world!</h1>
         <img src={weatherIcon} alt="weather-icon" style={{ width: "10%" }} />
@@ -102,8 +102,8 @@ export default function CurrentWeather({ data, forecastData }) {
       <div className="bottom">
         <p className="temperature">{dailyTemp[arrayNum]}</p>
 
-        <div className="details flex">
-          <ul className="weather-details">
+        <div className="details ">
+          <ul className="flex">
             <li>
               <p>Feels Like</p>
               <p>{Math.floor(dailyFeels)}°</p>

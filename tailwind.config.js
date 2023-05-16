@@ -2,7 +2,14 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    fontFamily: {
+      display: ["Manrope", "sans-serif"],
+    },
+    extend: {
+      backgroundImage: {
+        bgImg: "url(./pexels-josh-sorenson-391522.jpg)",
+      },
+    },
   },
   plugins: [],
 };
