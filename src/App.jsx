@@ -44,8 +44,8 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-bgImg bg-cover font-display">
-      <h1>Cheese</h1>
+    <div className=" font-display text-white  ">
+      <div className="bg-bgImg w-screen h-screen absolute -z-50 bg-cover brightness-75">s</div>
       <Search onSearchChange={handleOnSearchChange} />
       {/* Activates when full country is entered in the AsycPaginate */}
       {cityWeather && <CurrentWeather data={cityWeather} forecastData={cityForecast} />}

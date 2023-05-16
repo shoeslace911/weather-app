@@ -88,10 +88,9 @@ export default function CurrentWeather({ data, forecastData }) {
   let dailyIcon = `/src/img/icon/${forecastData.list[arrayNum].weather[0].icon}.png`;
 
   return (
-    <div className="text-white">
-      <div className="top">
-        <h1 className="underline text-center">Hello world!</h1>
-        <img src={weatherIcon} alt="weather-icon" style={{ width: "10%" }} />
+    <div className="top">
+      <img src={weatherIcon} alt="weather-icon" style={{ width: "10%" }} />
+      <div className="">
         <h2 className="city">{data.city}</h2>
         <h2 className="time">
           {hours}:{minutes}:{seconds}
@@ -128,24 +127,24 @@ export default function CurrentWeather({ data, forecastData }) {
             </li>
           </ul>
         </div>
-        <div className="time-container">
-          <div className="time">{dailyWeather[arrayNum]}</div>
-          <div className="time-slider">{dailyTime[arrayNum]}</div>
-          <img src={dailyIcon} alt="weather-icon" style={{ width: "10%" }} />
-          <Slider
-            aria-label="Temperature"
-            defaultValue={10}
-            getAriaValueText={valueText}
-            step={10}
-            marks
-            min={0}
-            max={dailyWeatherLength < 0 ? 10 : dailyWeatherLength * 10}
-          />
-        </div>
+      </div>
+      <div className="time-container">
+        <div className="time">{dailyWeather[arrayNum]}</div>
+        <div className="time-slider">{dailyTime[arrayNum]}</div>
+        <img src={dailyIcon} alt="weather-icon" style={{ width: "10%" }} />
+        <Slider
+          aria-label="Temperature"
+          defaultValue={10}
+          getAriaValueText={valueText}
+          step={10}
+          marks
+          min={0}
+          max={dailyWeatherLength < 0 ? 10 : dailyWeatherLength * 10}
+        />
+      </div>
 
-        <div className="time-slider">
-          <p>{dailyTime}</p>
-        </div>
+      <div className="time-slider">
+        <p>{dailyTime}</p>
       </div>
     </div>
   );
