@@ -84,25 +84,25 @@ export default function CurrentWeather({ data, forecastData }) {
   let dailyPressure = forecastData.list[arrayNum].main.pressure;
   let dailyHumidity = forecastData.list[arrayNum].main.humidity;
   let dailyWindSpeed = forecastData.list[arrayNum].wind.speed;
-  let dailyWindDeg = forecastData.list[arrayNum].wind.deg;
   let dailyIcon = `/src/img/icon/${forecastData.list[arrayNum].weather[0].icon}.png`;
 
   return (
     <div>
+      <div className="text-center pt-8">
+        <h2 className="text-6xl">{data.city}</h2>
+        <h2 className="text-5xl">
+          {hours}:{minutes}:{seconds}
+        </h2>
+        <h2 className="text-xl">
+          {dayOfWeek}, {today}
+        </h2>
+      </div>
       <div className="flex justify-center relative py-10">
         <img src={dailyIcon} alt="weather-icon" className="w-56 -z-10 " />
-        <div>
-          <h2 className="text-6xl">{data.city}</h2>
+        <div className="my-auto px-6">
           <h3 className="text-4xl capitalize">{data.weather[0].description}</h3>
-          <p className="text-4xl">{dailyTemp[arrayNum]}</p>
-          <h2 className="city-time">
-            <h2 className="text-5xl">
-              {hours}:{minutes}:{seconds}
-            </h2>
-            <h2 className="text-xl">
-              {dayOfWeek}, {today}
-            </h2>
-          </h2>
+          <p className="text-4xl text-center">{dailyTemp[arrayNum]}</p>
+          <h2 className="city-time"></h2>
         </div>
         <div className="my-auto">
           <ul className="flex ">
@@ -143,8 +143,8 @@ export default function CurrentWeather({ data, forecastData }) {
           }}
         />
       </div>
-      <div className="time-slider">
-        <p>{dailyTime}</p>
+      <div>
+        <p className="text-3xl font-semibold text-center">{dailyTime}</p>
       </div>
     </div>
   );
