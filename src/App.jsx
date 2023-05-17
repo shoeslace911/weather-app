@@ -4,6 +4,7 @@ import Search from "./comp/Search";
 import { WEATHER_API_KEY, WEATHER_API_URL } from "./Api";
 import { useState, useEffect } from "react";
 import Forecast from "./comp/Forecast";
+import "animate.css";
 
 function App() {
   const [cityWeather, setCityWeather] = useState(null);
