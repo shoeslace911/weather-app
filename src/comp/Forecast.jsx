@@ -90,29 +90,37 @@ export default function Forecast({ data }) {
     setDateAndTimes(updatedArray);
   };
   return (
-    <div>
-      <h1>5 day forecast</h1>
+    <div className="flex pb-96 justify-around my-8">
       {dateAndTimes.map((dateAndTime) => (
-        <div key={dateAndTime.id}>
+        <div
+          key={dateAndTime.id}
+          className="border-1 rounded-lg bg-white/30 backdrop-blur-sm my-10 px-2 py-3.5 relative"
+        >
           {/* change depending if dateAndTimes key == this key */}
-          <p>Date: {dateAndTime.date}</p>
-          <p>Temperature: {dateAndTime.temp[0][dateAndTime.selectedIndex]}</p>
-          <p>Time: {dateAndTime.time[0][dateAndTime.selectedIndex]}</p>
-          <p>Weather: {dateAndTime.weather[0][dateAndTime.selectedIndex]}</p>
-          <p>Feels like: {dateAndTime.feelsLike[0][dateAndTime.selectedIndex]}</p>
-          <img src={dateAndTime.icon[0][dateAndTime.selectedIndex]} alt="weather-icon" />
-          <Slider
-            aria-label="Time"
-            defaultValue={10}
-            step={10}
-            marks
-            min={10}
-            max={(sliderLength <= 0 ? 0 : sliderLength) * 10}
-            key={dateAndTime.id}
-            onChange={(event, value) => {
-              toggleChange(dateAndTime.id, Number(String(value).replace("0", "")) - 1);
-            }}
-          />
+          <div className="flex">
+            <img src={dateAndTime.icon[0][dateAndTime.selectedIndex]} alt="weather-icon" />
+            <div className="my-auto">
+              <p>Date: {dateAndTime.date}</p>
+              <p>Temperature: {dateAndTime.temp[0][dateAndTime.selectedIndex]}</p>
+            </div>
+          </div>
+          <div className="hidden">
+            <p>Time: {dateAndTime.time[0][dateAndTime.selectedIndex]}</p>
+            <p>Weather: {dateAndTime.weather[0][dateAndTime.selectedIndex]}</p>
+            <p>Feels like: {dateAndTime.feelsLike[0][dateAndTime.selectedIndex]}</p>
+            <Slider
+              aria-label="Time"
+              defaultValue={10}
+              step={10}
+              marks
+              min={10}
+              max={(sliderLength <= 0 ? 0 : sliderLength) * 10}
+              key={dateAndTime.id}
+              onChange={(event, value) => {
+                toggleChange(dateAndTime.id, Number(String(value).replace("0", "")) - 1);
+              }}
+            />
+          </div>
         </div>
       ))}
     </div>

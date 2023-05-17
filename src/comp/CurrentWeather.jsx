@@ -94,7 +94,7 @@ export default function CurrentWeather({ data, forecastData }) {
         </h2>
       </div>
       <div className="flex justify-center relative py-10">
-        <img src={dailyIcon} alt="weather-icon" className="w-56 -z-10 " />
+        <img src={dailyIcon} alt="weather-icon" className="w-56 z-10" />
         <div className="my-auto px-6">
           <h3 className="text-4xl capitalize">{data.weather[0].description}</h3>
           <p className="text-4xl text-center">{dailyTemp[arrayNum]}</p>
