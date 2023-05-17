@@ -12,10 +12,6 @@ export default function CurrentWeather({ data, forecastData }) {
 
   //Slider
   let dailyWeatherLength = dailyWeather.length - 1;
-
-  //ICons
-  let weatherIcon = `/src/img/icon/${data.weather[0].icon}.png`;
-
   // date & time
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const monthsOfYear = [
@@ -102,7 +98,6 @@ export default function CurrentWeather({ data, forecastData }) {
         <div className="my-auto px-6">
           <h3 className="text-4xl capitalize">{data.weather[0].description}</h3>
           <p className="text-4xl text-center">{dailyTemp[arrayNum]}</p>
-          <h2 className="city-time"></h2>
         </div>
         <div className="my-auto">
           <ul className="flex ">
@@ -144,7 +139,15 @@ export default function CurrentWeather({ data, forecastData }) {
         />
       </div>
       <div>
-        <p className="text-3xl font-semibold text-center">{dailyTime}</p>
+        <ul className="text-center">
+          {dailyTime.map((shit) => {
+            return (
+              <li className="inline text-3xl px-16 " key={crypto.randomUUID()}>
+                {shit}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
