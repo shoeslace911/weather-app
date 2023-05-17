@@ -84,8 +84,8 @@ export default function CurrentWeather({ data, forecastData }) {
 
   return (
     <div>
-      <div className="text-center pt-8">
-        <h2 className="text-6xl">{data.city}</h2>
+      <div className="text-center pt-8 transition ease-in-out">
+        <h2 className="text-6xl ">{data.city}</h2>
         <h2 className="text-5xl">
           {hours}:{minutes}:{seconds}
         </h2>
