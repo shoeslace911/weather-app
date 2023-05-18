@@ -128,7 +128,7 @@ export default function Forecast({ data }) {
               defaultValue={10}
               step={10}
               marks
-              min={10}
+              min={sliderLength && 20}
               max={(sliderLength <= 0 ? 0 : sliderLength) * 10}
               key={dateAndTime.id}
               onChange={(event, value) => {
