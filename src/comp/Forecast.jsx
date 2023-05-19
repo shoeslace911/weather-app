@@ -4,6 +4,7 @@ import { Slider } from "@mui/material";
 
 export default function Forecast({ data }) {
   let [dateAndTimes, setDateAndTimes] = useState([]);
+  let activeClass = "block";
   useEffect(() => {
     let extractedDates = data.list;
     let formattedDateAndTimes = [];
@@ -106,20 +107,20 @@ export default function Forecast({ data }) {
       {dateAndTimes.map((dateAndTime) => (
         <div
           key={dateAndTime.id}
-          className="border-1 cursor-pointer rounded-lg bg-white/30 backdrop-blur-sm my-10 px-2 py-3.5 relative"
+          className="border-1 cursor-pointer rounded-lg bg-white/30 backdrop-blur-sm my-10 px-2 py-3.5 relative hover:bg-white/20"
           onClick={() => {
             showForecast(dateAndTime.id);
           }}
         >
           {/* change depending if dateAndTimes key == this key */}
-          <div className="flex">
+          <div className="flex ">
             <img src={dateAndTime.icon[0][dateAndTime.selectedIndex]} alt="weather-icon" />
             <div className="my-auto">
               <p>Date: {dateAndTime.date}</p>
               <p>Temperature: {dateAndTime.temp[0][dateAndTime.selectedIndex]}</p>
             </div>
           </div>
-          <div className={dateAndTime.isActive ? "inline" : "hidden"}>
+          <div className={dateAndTime.isActive ? { activeClass } : "hidden"}>
             <p>Time: {dateAndTime.time[0][dateAndTime.selectedIndex]}</p>
             <p>Weather: {dateAndTime.weather[0][dateAndTime.selectedIndex]}</p>
             <p>Feels like: {dateAndTime.feelsLike[0][dateAndTime.selectedIndex]}</p>
