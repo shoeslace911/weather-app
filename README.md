@@ -1,4 +1,4 @@
-Using an API in React for the first time!
+Making a weather app using the OpenWeatherMap API using React.
 
 ![image](https://github.com/shoeslace911/weather-app/assets/98511262/b190f633-0798-4a1f-8f2f-4578104bb3a2)
 
