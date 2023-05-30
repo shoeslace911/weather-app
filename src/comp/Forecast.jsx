@@ -72,7 +72,7 @@ export default function Forecast({ data }) {
         weatherArray.push(weather);
         tempArray.push(floorFloat(extractedDate.main.temp));
         feelsLikeArray.push(floorFloat(extractedDate.main.feels_like));
-        iconArray.push(`/src/img/icon/${extractedDate.weather[0].icon}.png`);
+        iconArray.push(`src/img/icon/${extractedDate.weather[0].icon}.png`);
         return;
       }
     });
